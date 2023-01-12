@@ -17,8 +17,22 @@ class QuestionsController < ApplicationController
       render :new
       flash[:notice] = 'Not created'
     end
+  end
 
-    
+  def edit
+    @question = Question.find_by id: params[:id]
+  end
+
+  def update
+    @question = Question.find_by id: params[:id]
+
+    if @question.update question_params
+      redirect_to questions_path
+      flash[:notice] = 'Post successfully created'
+    else
+      render :edit
+      flash[:notice] = 'Not created'
+    end
   end
 
   private
