@@ -16,7 +16,7 @@ class QuestionsController < ApplicationController
 
     if @question.save
       redirect_to questions_path
-      flash[:notice] = 'Post successfully created'
+      flash[:success] = 'Post successfully created'
     else
       render :new
       flash[:notice] = 'Not created'
@@ -32,7 +32,7 @@ class QuestionsController < ApplicationController
 
     if @question.update question_params
       redirect_to questions_path
-      flash[:notice] = 'Post successfully created'
+      flash[:success] = 'Post successfully updated'
     else
       render :edit
       flash[:notice] = 'Not created'
@@ -43,6 +43,8 @@ class QuestionsController < ApplicationController
     @question = Question.find_by id: params[:id]
 
     @question.destroy
+    flash[:success] = 'Post deleted'
+
     redirect_to questions_path
   end
   
