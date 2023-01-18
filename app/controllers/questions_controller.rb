@@ -1,10 +1,11 @@
 class QuestionsController < ApplicationController
+  before_action :set_question, only: %i[show destroy edit update]
+
   def index
     @questions = Question.all
   end
 
   def show
-    @question = Question.find_by id: params[:id]
   end
 
   def new
@@ -24,12 +25,9 @@ class QuestionsController < ApplicationController
   end
 
   def edit
-    @question = Question.find_by id: params[:id]
   end
 
   def update
-    @question = Question.find_by id: params[:id]
-
     if @question.update question_params
       redirect_to questions_path
       flash[:success] = 'Post successfully updated'
@@ -40,18 +38,19 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    @question = Question.find_by id: params[:id]
-
     @question.destroy
     flash[:success] = 'Post deleted'
 
     redirect_to questions_path
   end
-  
 
   private
 
   def question_params
     params.require(:question).permit(:title, :body)
+  end
+
+  def set_question
+    @question = Question.find params[:id]
   end
 end
