@@ -1,6 +1,6 @@
 class AnswersController < ApplicationController
   before_action :set_question!
-  before_action :set_answer! # order of before actions important!!!
+  before_action :set_answer!, except: :create # order of before actions important!!!
 
   def update
     if @answer.update answer_params
@@ -16,7 +16,6 @@ class AnswersController < ApplicationController
   def edit
     
   end
-  
 
   def create
     @answer = @question.answers.build answer_params  # create nested entity
@@ -50,5 +49,4 @@ class AnswersController < ApplicationController
   def set_answer!
     @answer = @question.answers.find params[:id]
   end
-  
 end
