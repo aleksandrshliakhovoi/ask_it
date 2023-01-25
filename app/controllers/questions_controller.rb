@@ -2,12 +2,13 @@ class QuestionsController < ApplicationController
   before_action :set_question!, only: %i[show destroy edit update]
 
   def index
-    @questions = Question.all
+    @questions = Question.order(created_at: :desc).page params[:page]
   end
 
   def show
-    @answers = @question.answers.order created_at: :desc
     @answer = @question.answers.build # here is answer object init
+    @answers = @question.answers.order(created_at: :desc).page(params[:page]).per(3)
+    #Answer.where(question: @question).limit(2).order(created_at: :desc)
   end
 
   def new
@@ -56,3 +57,4 @@ class QuestionsController < ApplicationController
     @question = Question.find params[:id]
   end
 end
+
