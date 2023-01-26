@@ -1,11 +1,13 @@
 class AnswersController < ApplicationController
+  include ActionView::RecordIdentifier
+
   before_action :set_question!
   before_action :set_answer!, except: :create # order of before actions important!!!
 
   def update
     if @answer.update answer_params
       flash[:success] = 'Answer successfully updated'
-      redirect_to question_path(@question, anchor: "answer-#{@answer.id}")
+      redirect_to question_path(@question, anchor: dom_id(@answer)) #"answer-#{@answer.id}")
     else
       render :edit
       flash[:notice] = 'Not created'

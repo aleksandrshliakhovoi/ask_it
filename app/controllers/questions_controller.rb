@@ -2,12 +2,14 @@ class QuestionsController < ApplicationController
   before_action :set_question!, only: %i[show destroy edit update]
 
   def index
-    @questions = Question.order(created_at: :desc).page params[:page]
+    @pagy, @questions = pagy Question.order(created_at: :desc)
+    # @questions = Question.order(created_at: :desc).page params[:page] for kaminari
   end
 
   def show
     @answer = @question.answers.build # here is answer object init
-    @answers = @question.answers.order(created_at: :desc).page(params[:page]).per(3)
+    @pagy, @answers = pagy @question.answers.order(created_at: :desc)
+    #@answers = @question.answers.order(created_at: :desc).page(params[:page]).per(3)
     #Answer.where(question: @question).limit(2).order(created_at: :desc)
   end
 
