@@ -17,6 +17,9 @@
 
 <h2>Write your answer</h2>
 
+<% provide :page_title, @question.title %>
+<% currently_at 'Questions' %>
+
 <%= render 'answers/form' %>
 
 <h2 class="mt-5">Answers</h2>
