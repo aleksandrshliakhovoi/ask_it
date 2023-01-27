@@ -43,7 +43,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'faker'
   gem 'faraday'
-
+  gem 'sidekiq'
 end
 
 group :development do
