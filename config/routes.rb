@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  # get 'sessions/new'
+  # get 'sessions/create'
+  # get 'sessions/destroy'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root 'pages#index'
 
@@ -7,6 +10,7 @@ Rails.application.routes.draw do
   # get '/questions/:id/edit', to: 'questions#edit'
   # post '/questions', to: 'questions#create'
 
+  resources :sessions, only: %i[new create destroy]
   resources :users, only: %i[new create]
 
   resources :questions do
