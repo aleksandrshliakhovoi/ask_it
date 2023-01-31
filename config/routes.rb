@@ -10,8 +10,8 @@ Rails.application.routes.draw do
   # get '/questions/:id/edit', to: 'questions#edit'
   # post '/questions', to: 'questions#create'
 
-  resources :sessions, only: %i[new create destroy]
-  resources :users, only: %i[new create]
+  resource :session, only: %i[new create destroy] # if in single there are no id
+  resources :users, only: %i[new edit update create]
 
   resources :questions do
     resources :answers, except: %i[new show]
