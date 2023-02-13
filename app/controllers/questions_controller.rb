@@ -55,6 +55,10 @@ class QuestionsController < ApplicationController
     redirect_to questions_path
   end
 
+  def about
+    render json: formate_questions
+  end
+
   private
 
   def question_params
@@ -63,6 +67,10 @@ class QuestionsController < ApplicationController
 
   def set_question!
     @question = Question.find params[:id]
+  end
+
+  def formate_questions
+    Question.includes(:answers).limit(5).each { |q| q.answers.each{ |a| a.body } }
   end
 end
 

@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :users, only: %i[new edit update create]
 
   resources :questions do
+    get :about, on: :collection
     resources :answers, except: %i[new show]
   end
 end
